@@ -1,0 +1,678 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>POP</title>
+    <link rel="icon" href="img/tab-icon.png" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="jquery.js"></script>
+    <script src="slide.js"></script>
+    <script src="data.js"></script>
+    <script src="login.js"></script>
+    <script src="player.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="main.css" />
+
+    <style>
+
+        .content {
+            background-image: url("img/bg-10.jpg");
+        }
+    </style>
+
+    <script type="text/html" id="template1">
+
+        <div class="col-md-3 slide06">
+            <div class="card">
+                <a href="{{link}}">
+                    <img class="card-img-top" src="{{thumbnail}}" />
+                    <div class="card-body">
+                        <pre><span style="font-weight: bold; font-size: 24px;">{{title}}</span>
+Artist: {{artist}}
+Album: {{album}}</pre>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </script>
+
+</head>
+<body>
+
+
+    <div class="container-fluid">
+
+        <!--logo + search bar-->
+        <div class="header row" id="head">
+            <div class="logo col-md-4" style="padding-left: 0px;">
+                <a href="index.html"><img style="padding-left: 0px" class="col-md-12" src="img/logo.png" /></a>
+            </div>
+            <div class="s-bar col-md-8">
+                <div class="s-bar-cont row">
+                    <div class="col-md-12">
+                        <input class="srch-bar col-md-5" id="keyword" type="text" placeholder="search for artists albums or songs" />
+                        <button class="btn btn-danger bton" type="button" onclick="search()">SEARCH</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Navigation bar-->
+        <nav class="row navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navi-bar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navi-bar">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="target_name" href="#">
+                            CATEGORIES
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="ROCK.html">Rock</a>
+                            <a class="dropdown-item" href="POP.html">Pop</a>
+                            <a class="dropdown-item" href="JAZZ.html">Jazz</a>
+                            <a class="dropdown-item" href="RAP.html">Rap</a>
+                            <a class="dropdown-item" href="CLASSICAL.html">Classical</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                            ARTISTS
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="ATIF.html">Atif Aslam</a>
+                            <a class="dropdown-item" href="SAHIR.html">Sahir Ali Bagga</a>
+                            <a class="dropdown-item" href="ARIF.html">Arif Lohar</a>
+                            <a class="dropdown-item" href="SHEHZAD.html">Shehzad Roy</a>
+                            <a class="dropdown-item" href="RAHAT.html">Rahat Fateh Ali Khan</a>
+                            <a class="dropdown-item" href="ALI.html">Ali Zafar</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="ALBUMS.html">ALBUMS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ARTICLES.html">ARTICLES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="REVIEW.html">REVIEWS</a></li>
+                    <li class="nav-item" data-toggle="modal" data-target="#exampleModalCenter" id="sign1"><a class="nav-link" href="#">LOG IN</a></li>
+                    <li class="nav-item" id="sign2" style="border-right: 1px solid black;"><a class="nav-link" href="SIGN.html">SIGN UP</a></li>
+
+                </ul>
+            </div>
+            <!--logout button-->
+            <ul class="navbar-nav" id="log">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="target_name" href="#" style="padding: 10px; border-left: 2px solid black;">
+                        <span id="username"></span>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" style="left: auto; right: 0;">
+                        <a class="dropdown-item" style="color: white;" href="#" onclick="abc234();">LOGOUT</a>
+                    </div>
+                </li>
+            </ul>
+
+        </nav>
+        <!--Wallpaper-->
+        <div class="row wall">
+            <img class="w-100" src="img/rock_wall.jpg" />
+        </div>
+        <!--Content-->
+        <div class="content">
+            <div class="dull w-100">
+
+                <div class="slogan" id="slgn">
+                    <div class="slo" style="font-family: 'Script MT';">Bring Music To Life...!</div>
+                </div>
+
+                <!---Search item-->
+                <div class="row">
+                    <div class="search-div col-md-12" id="search-div"></div>
+                </div>
+                <div class="row" id="back" style="text-align: center;">
+                    <div class="col-md-12">
+                        <button class="btn btn-danger" onclick="back()" type="button">BACK</button>
+                    </div>
+                </div>
+
+                <!--modal-->
+
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: white">LOG IN</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color: white">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <input class="col-md-12" type="email" placeholder="E-mail" id="logmail" value="" />
+                                <input class="col-md-12" type="password" placeholder="password" id="logpass" value="" />
+
+                            </div>
+                            <div class="modal-footer">
+                                <span style="color: white;">Need an account? <a href="SIGN.html"><span style="text-decoration:underline; color: dodgerblue;"> Sign up</span></a> now!</span>
+                                <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" onclick="login();" class="btn btn-danger">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--main div-->
+                <div class="main-div" id="main-div">
+
+
+                    <!--Artists-->
+                    <div class="artists">
+                        <div class="row sli_header">
+                            <div class="head col-md-9"><h1><pre style="color: white;">TOP POP ARTISTS</pre></h1></div>
+                            <div class="col-md-3" id="button02">
+                                <button type="button" onclick="Prev02();" class="btn btn-danger" id="prev02"><<</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" onclick="Next02();" class="btn btn-danger" id="next02">>></button>
+                            </div>
+                        </div>
+
+                        <div id="card_slider02" class="card_slider">
+                            <div id="slide-container02">
+                                <div class="slide02">
+                                    <div class="col-md-12">
+                                        <div class="card flot">
+                                            <a href="FARHAN.html">
+                                                <img class="card-img-top" src="img/farhan.jpg" />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">FARHAN SAEED</span></pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide02">
+                                    <div class="col-md-12">
+                                        <div class="card flot">
+                                            <a href="BILAL.html">
+                                                <img class="card-img-top" src="img/bilal.jpg " />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">BILAL SAEED</span></pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide02">
+                                    <div class="col-md-12">
+                                        <div class="card flot">
+                                            <a href="SHEHZAD.html">
+                                                <img class="card-img-top" src="img/shehzad.png" />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">SHEHZAD ROY</span></pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide02">
+                                    <div class="col-md-12">
+                                        <div class="card flot">
+                                            <a href="IMRAN.html">
+                                                <img class="card-img-top" src="img/imran.jpg" />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">IMRAN KHAN</span></pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide02">
+                                    <div class="col-md-12" style="overflow: hidden;">
+                                        <div class="card flot">
+                                            <a href="JAWAD.html">
+                                                <img class="card-img-top" src="img/jawad.png" />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">JAWAD AHMED</span></pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Albums-->
+                    <div class="albums">
+                        <div class="row sli_header">
+                            <div class="head col-md-9"><h1><pre style="color: white;"><a href="ALBUMS.html"> TOP ALBUMS</a></pre></h1></div>
+                            <div class="col-md-3" id="button03">
+                                <button type="button" onclick="Prev03();" class="btn btn-danger" id="prev03"><<</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" onclick="Next03();" class="btn btn-danger" id="next03">>></button>
+                            </div>
+                        </div>
+
+                        <div id="card_slider03" class="card_slider">
+                            <div id="slide-container03">
+                                <div class="slide03">
+                                    <div class="col-md-12">
+                                        <div class="card flot">
+                                            <a href="ZINDAGI.html">
+                                                <img class="card-img-top" src="img/vaaste.jpg" />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">Zindagi</span>
+Shehzad Roy</pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide03">
+                                    <div class="col-md-12">
+                                        <div class="card flot">
+                                            <a href="RAHATEIN.html">
+                                                <img class="card-img-top" src="img/rahaten.jpg" />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">Rahatein</span>
+Rahat Fateh Ali Khan</pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide03">
+                                    <div class="col-md-12">
+                                        <div class="card flot">
+                                            <a href="AATISH.html">
+                                                <img class="card-img-top" src="img/yaariyan.jpg" />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">Aatish</span>
+Faakhir Hussain</pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide03">
+                                    <div class="col-md-12">
+                                        <div class="card flot">
+                                            <a href="VIRSA.html">
+                                                <img class="card-img-top" src="img/bhula-diya.jpg" />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">Virsa</span>
+Sahir Ali Bagga</pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slide03">
+                                    <div class="col-md-12">
+                                        <div class="card flot">
+                                            <a href="JHOOM.html">
+                                                <img class="card-img-top" src="img/jhoom.jpg" />
+                                                <div class="card-body">
+                                                    <pre><span style="font-weight: bold; font-size: 24px;">Jhoom</span>
+Ali Zafar</pre>
+                                                    <span class="reddish">View more &rarr;</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Instruments-->
+                    <div class="newarrival">
+                        <div class="row sli_header">
+                            <div class="head col-md-9"><h1><pre style="color: white;"> POP INSTRUMENTS </pre></h1></div>
+
+                        </div>
+                        <div id="card_slider06" class="card_slider" style="text-align: center;">
+                            <div id="slide-container06">
+
+                                <div class="col-md-3 slide06">
+                                    <a href="art-3.html">
+                                        <div class="card">
+                                            <img class="card-img-top" src="img/guitar.jpg" />
+                                            <div class="card-body">
+                                                <pre><span style="font-weight: bold; font-size: 24px;">GUITAR</span></pre>
+                                                <span class="reddish">View more &rarr;</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3 slide06">
+                                    <a href="art-14.html">
+                                        <div class="card">
+                                            <img class="card-img-top" src="img/pino.jpg" />
+                                            <div class="card-body">
+                                                <pre><span style="font-weight: bold; font-size: 24px;">PIANO</span></pre>
+                                                <span class="reddish">View more &rarr;</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3 slide06">
+                                    <a href="art-12.html">
+                                        <div class="card">
+                                            <img class="card-img-top" src="img/finger.jpg" />
+                                            <div class="card-body">
+                                                <pre><span style="font-weight: bold; font-size: 24px;">HAND CYMBALS</span></pre>
+                                                <span class="reddish">View more &rarr;</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3 slide06">
+                                    <a href="art-6.html">
+                                        <div class="card">
+                                            <img class="card-img-top" src="img/violin.jpg" />
+                                            <div class="card-body">
+                                                <pre><span style="font-weight: bold; font-size: 24px;">VIOLIN</span></pre>
+                                                <span class="reddish">View more &rarr;</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        ---->
+                    </div>
+
+
+                    <!----Songs-->
+                    <h2 class="col-md-12" style="color: white">PLAYLISTS</h2>
+                    <div class="row">
+                        <div class="col-md-11" style="margin: auto;">
+
+                            <div class="col-md-3 slide06">
+                                <div class="card">
+                                    <img class="card-img-top" src="img/vaaste.jpg" />
+                                    <div class="card-body">
+                                        <pre><span style="font-weight: bold; font-size: 24px;">VAASTE</span></pre>
+
+                                        <div class="card-fot-div row" id="sng01">
+                                            <img id="playpause01" onclick="played(this, 'vaaste','bar01','played01','stop01');" src="img/play-icon.png" class="start col-md-1" />
+                                            <img id="stop01" onclick="stoped(this, 'vaaste','bar01','played01','playpause01');" src="img/stop-icon-red.png" class="stop col-md-1" />
+
+                                            <div class="playing col-md-9" id="playing01">
+                                                <span class="bar" id="bar01"><span class="done" id="played01"></span></span>
+                                                <audio class="playlist" id="vaaste">
+                                                    <source src="sng/S_Dil-Se.mp3" />
+                                                </audio>
+                                            </div>
+                                            <a id="vaastedwn" href="dnld/S_Dil-Se.zip"></a>
+                                            <img src="img/download-icon.png" id="download01" onclick="download('vaastedwn');" class="col-md-1" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 slide06">
+                                <div class="card">
+                                    <img class="card-img-top" src="img/bhula-diya.jpg" />
+                                    <div class="card-body">
+                                        <pre><span style="font-weight: bold; font-size: 24px;">TERA HONE</span></pre>
+
+                                        <div class="card-fot-div row" id="sng02">
+                                            <img id="playpause02" onclick="played(this, 'tera','bar02','played02','stop02');" src="img/play-icon.png" class="start col-md-1" />
+                                            <img id="stop02" onclick="stoped(this, 'tera','bar02','played02','playpause02');" src="img/stop-icon-red.png" class="stop col-md-1" />
+
+                                            <div class="playing col-md-9" id="playing02">
+                                                <span class="bar" id="bar02"><span class="done" id="played02"></span></span>
+                                                <audio class="playlist" id="tera">
+                                                    <source src="sng/S_Dil-Se.mp3" />
+                                                </audio>
+                                            </div>
+                                            <a id="teradwn" href="dnld/S_Dil-Se.zip"></a>
+                                            <img src="img/download-icon.png" id="download02" onclick="download('teradwn');" class="col-md-1" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 slide06">
+                                <div class="card">
+                                    <img class="card-img-top" src="img/dosti.jpg" />
+                                    <div class="card-body">
+                                        <pre><span style="font-weight: bold; font-size: 24px;">TU HI TU</span></pre>
+
+                                        <div class="card-fot-div row" id="sng03">
+                                            <img id="playpause03" onclick="played(this, 'tuhi','bar03','played03','stop03');" src="img/play-icon.png" class="start col-md-1" />
+                                            <img id="stop03" onclick="stoped(this, 'tuhi','bar03','played03','playpause03');" src="img/stop-icon-red.png" class="stop col-md-1" />
+
+                                            <div class="playing col-md-9" id="playing03">
+                                                <span class="bar" id="bar03"><span class="done" id="played03"></span></span>
+                                                <audio class="playlist" id="tuhi">
+                                                    <source src="sng/S_Dil-Se.mp3" />
+                                                </audio>
+                                            </div>
+                                            <a id="tuhidwn" href="dnld/S_Dil-Se.zip"></a>
+                                            <img src="img/download-icon.png" id="download03" onclick="download('tuhidwn');" class="col-md-1" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 slide06">
+                                <div class="card">
+                                    <img class="card-img-top" src="img/paniyon.png" />
+                                    <div class="card-body">
+                                        <pre><span style="font-weight: bold; font-size: 24px;">PREM KAHANI</span></pre>
+
+                                        <div class="card-fot-div row" id="sng04">
+                                            <img id="playpause04" onclick="played(this, 'teri','bar04','played04','stop04');" src="img/play-icon.png" class="start col-md-1" />
+                                            <img id="stop04" onclick="stoped(this, 'teri','bar04','played04','playpause04');" src="img/stop-icon-red.png" class="stop col-md-1" />
+
+                                            <div class="playing col-md-9" id="playing04">
+                                                <span class="bar" id="bar04"><span class="done" id="played04"></span></span>
+                                                <audio class="playlist" id="teri">
+                                                    <source src="sng/S_Dil-Se.mp3" />
+                                                </audio>
+                                            </div>
+                                            <a id="teridwn" href="dnld/S_Dil-Se.zip"></a>
+                                            <img src="img/download-icon.png" id="download04" onclick="download('teridwn');" class="col-md-1" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 slide06">
+                                <div class="card">
+                                    <img class="card-img-top" src="img/pal.png" />
+                                    <div class="card-body">
+                                        <pre><span style="font-weight: bold; font-size: 24px;">SOORAJ</span></pre>
+
+                                        <div class="card-fot-div row" id="sng05">
+                                            <img id="playpause05" onclick="played(this, 'sooraj','bar05','played05','stop05');" src="img/play-icon.png" class="start col-md-1" />
+                                            <img id="stop05" onclick="stoped(this, 'sooraj','bar05','played05','playpause05');" src="img/stop-icon-red.png" class="stop col-md-1" />
+
+                                            <div class="playing col-md-9" id="playing05">
+                                                <span class="bar" id="bar05"><span class="done" id="played05"></span></span>
+                                                <audio class="playlist" id="sooraj">
+                                                    <source src="sng/S_Dil-Se.mp3" />
+                                                </audio>
+                                            </div>
+                                            <a id="soorajdwn" href="dnld/S_Dil-Se.zip"></a>
+                                            <img src="img/download-icon.png" id="download05" onclick="download('soorajdwn');" class="col-md-1" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 slide06">
+                                <div class="card">
+                                    <img class="card-img-top" src="img/yaariyan.jpg" />
+                                    <div class="card-body">
+                                        <pre><span style="font-weight: bold; font-size: 24px;">SUBHANALLAH</span></pre>
+
+                                        <div class="card-fot-div row" id="sng06">
+                                            <img id="playpause06" onclick="played(this, 'subhanallah','bar06','played06','stop06');" src="img/play-icon.png" class="start col-md-1" />
+                                            <img id="stop06" onclick="stoped(this, 'subhanallah','bar06','played06','playpause06');" src="img/stop-icon-red.png" class="stop col-md-1" />
+
+                                            <div class="playing col-md-9" id="playing06">
+                                                <span class="bar" id="bar06"><span class="done" id="played06"></span></span>
+                                                <audio class="playlist" id="subhanallah">
+                                                    <source src="sng/S_Dil-Se.mp3" />
+                                                </audio>
+                                            </div>
+                                            <a id="subhanallahdwn" href="dnld/S_Dil-Se.zip"></a>
+                                            <img src="img/download-icon.png" id="download06" onclick="download('subhanallahdwn');" class="col-md-1" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 slide06">
+                                <div class="card">
+                                    <img class="card-img-top" src="img/tere-bin.png" />
+                                    <div class="card-body">
+                                        <pre><span style="font-weight: bold; font-size: 24px;">APNA BANAANA</span></pre>
+
+                                        <div class="card-fot-div row" id="sng07">
+                                            <img id="playpause07" onclick="played(this, 'tumhe','bar07','played07','stop07');" src="img/play-icon.png" class="start col-md-1" />
+                                            <img id="stop07" onclick="stoped(this, 'tumhe','bar07','played07','playpause07');" src="img/stop-icon-red.png" class="stop col-md-1" />
+
+                                            <div class="playing col-md-9" id="playing07">
+                                                <span class="bar" id="bar07"><span class="done" id="played07"></span></span>
+                                                <audio class="playlist" id="tumhe">
+                                                    <source src="sng/S_Dil-Se.mp3" />
+                                                </audio>
+                                            </div>
+                                            <a id="tumhedwn" href="dnld/S_Dil-Se.zip"></a>
+                                            <img src="img/download-icon.png" id="download07" onclick="download('tumhedwn');" class="col-md-1" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 slide06">
+                                <div class="card">
+                                    <img class="card-img-top" src="img/raabta.png" />
+                                    <div class="card-body">
+                                        <pre><span style="font-weight: bold; font-size: 24px;">A SKY</span></pre>
+
+                                        <div class="card-fot-div row" id="sng08">
+                                            <img id="playpause08" onclick="played(this, 'sky','bar08','played08','stop08');" src="img/play-icon.png" class="start col-md-1" />
+                                            <img id="stop08" onclick="stoped(this, 'sky','bar08','played08','playpause08');" src="img/stop-icon-red.png" class="stop col-md-1" />
+
+                                            <div class="playing col-md-9" id="playing08">
+                                                <span class="bar" id="bar08"><span class="done" id="played08"></span></span>
+                                                <audio class="playlist" id="sky">
+                                                    <source src="sng/S_Dil-Se.mp3" />
+                                                </audio>
+                                            </div>
+                                            <a id="skydwn" href="dnld/S_Dil-Se.zip"></a>
+                                            <img src="img/download-icon.png" id="download08" onclick="download('skydwn');" class="col-md-1" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--events-->
+                    <div class="newarrival">
+                        <div class="row sli_header">
+                            <div class="head col-md-9"><h1><pre style="color: white;"> EVENTS </pre></h1></div>
+
+                        </div>
+                        <!--events-->
+                        <div class="carousel slide col-md-9" id="carouseldemo" data-ride="carousel" style="margin: 40px auto;">
+                            <ul class="carousel-indicators">
+                                <li data-target="#carouseldemo" data-slide-to="0"></li>
+                                <li data-target="#carouseldemo" data-slide-to="1"></li>
+                                <li data-target="#carouseldemo" data-slide-to="2"></li>
+                                <li data-target="#carouseldemo" data-slide-to="3"></li>
+                                <li data-target="#carouseldemo" data-slide-to="4"></li>
+                                <li data-target="#carouseldemo" data-slide-to="5"></li>
+                                <li data-target="#carouseldemo" data-slide-to="6"></li>
+                            </ul>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="img/conc/concrt-1.png" class="d-block w-100" alt="Alternate Text" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/conc/concrt-2.png" class="d-block w-100" alt="Alternate Text" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/conc/concrt-3.png" class="d-block w-100" alt="Alternate Text" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/conc/concrt-4.png" class="d-block w-100" alt="Alternate Text" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/conc/concrt-5.png" class="d-block w-100" alt="Alternate Text" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/conc/concrt-6.png" class="d-block w-100" alt="Alternate Text" />
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/conc/concrt-7.png" class="d-block w-100" alt="Alternate Text" />
+                                </div>
+                            </div>
+                            <div>
+                                <a class="carousel-control-prev" href="#carouseldemo" data-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouseldemo" data-slide="next">
+                                    <span class="carousel-control-next-icon">
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+                <!------footer-->
+                <div class="footer dulls w-100">
+                    &copy; 2019 musicWorld.com, All Rights <span style="font-weight:bold;">Reserved</span>.
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>                                                

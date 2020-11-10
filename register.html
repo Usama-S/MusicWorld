@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>SIGN UP</title>
+    <link rel="icon" href="img/tab-icon.png" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="jquery.js"></script>
+    <script src="slide.js"></script>
+    <script src="data.js"></script>
+    <script src="login.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="main.css" />
+
+    <style>
+
+        .content {
+            background-image: url("img/bg-15.jpg");
+        }
+    </style>
+
+    <script type="text/html" id="template1">
+
+        <div class="col-md-3 slide06">
+            <div class="card">
+                <a href="{{link}}">
+                    <img class="card-img-top" src="{{thumbnail}}" />
+                    <div class="card-body">
+                        <pre><span style="font-weight: bold; font-size: 24px;">{{title}}</span>
+Artist: {{artist}}
+Album: {{album}}</pre>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </script>
+
+    
+
+</head>
+<body>
+
+
+    <div class="container-fluid">
+
+        <!--logo + search bar-->
+        <div class="header row" id="head">
+            <div class="logo col-md-4" style="padding-left: 0px;">
+                <a href="index.html"><img style="padding-left: 0px" class="col-md-12" src="img/logo.png" /></a>
+            </div>
+            <div class="s-bar col-md-8">
+                <div class="s-bar-cont row">
+                    <div class="col-md-12">
+                        <input class="srch-bar col-md-5" id="keyword" type="text" />
+                        <button class="btn btn-danger bton" type="button" onclick="search()">SEARCH</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Navigation bar-->
+        <nav class="row navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navi-bar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navi-bar">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="target_name" href="#">
+                            CATEGORIES
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="ROCK.html">Rock</a>
+                            <a class="dropdown-item" href="POP.html">Pop</a>
+                            <a class="dropdown-item" href="JAZZ.html">Jazz</a>
+                            <a class="dropdown-item" href="RAP.html">Rap</a>
+                            <a class="dropdown-item" href="CLASSICAL.html">Classical</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                            ARTISTS
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="ATIF.html">Atif Aslam</a>
+                            <a class="dropdown-item" href="SAHIR.html">Sahir Ali Bagga</a>
+                            <a class="dropdown-item" href="ARIF.html">Arif Lohar</a>
+                            <a class="dropdown-item" href="SHEHZAD.html">Shehzad Roy</a>
+                            <a class="dropdown-item" href="RAHAT.html">Rahat Fateh Ali Khan</a>
+                            <a class="dropdown-item" href="ALI.html">Ali Zafar</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="ALBUMS.html">ALBUMS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ARTICLES.html">ARTICLES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="REVIEW.html">REVIEWS</a></li>
+                    <li class="nav-item" data-toggle="modal" data-target="#exampleModalCenter" id="sign1"><a class="nav-link" href="#">LOG IN</a></li>
+                    <li class="nav-item active" id="sign2" style="border-right: 1px solid black;"><a class="nav-link" href="SIGN.html">SIGN UP</a></li>
+
+                </ul>
+            </div>
+            <!--logout button-->
+            <ul class="navbar-nav" id="log">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="target_name" href="#" style="padding: 10px; border-left: 2px solid black;">
+                        <span id="username"></span>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" style="left: auto; right: 0;">
+                        <a class="dropdown-item" style="color: white;" href="#" onclick="abc234();">LOGOUT</a>
+                    </div>
+                </li>
+            </ul>
+
+        </nav>
+
+        <!--Content-->
+        <div class="content">
+            <div class="dull w-100">
+
+                <!---Search item-->
+                <div class="row">
+                    <div class="search-div col-md-12" id="search-div"></div>
+                </div>
+                <div class="row" id="back" style="text-align: center;">
+                    <div class="col-md-12">
+                        <button class="btn btn-danger" onclick="back()" type="button">BACK</button>
+                    </div>
+                </div>
+                <!--modal-->
+
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: white">LOG IN</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color: white">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <input class="col-md-12" type="email" placeholder="E-mail" id="logmail" value="" />
+                                <input class="col-md-12" type="password" placeholder="password" id="logpass" value="" />
+
+                            </div>
+                            <div class="modal-footer">
+                                <span style="color: white;">Need an account? <a href="SIGN.html"><span style="text-decoration:underline; color: dodgerblue;"> Sign up</span></a> now!</span>
+                                <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" onclick="login();" class="btn btn-danger">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="main-div" id="main-div">
+
+                    <div class="row">
+
+                        <div class="col-md-6 signup">
+
+                            <div class="modal-header">
+                                <h2 class="modal-title" id="exampleModalLongTitle" style="color: white">SIGN UP</h2>
+                            </div>
+
+                            <form>
+
+                                <input class="col-md-10" type="text" id="name" placeholder="  Full Name" />
+
+                                <input class="col-md-10" type="email" id="mail" placeholder="  E-mail" />
+
+                                <input class="col-md-10" type="password" minlength="8" maxlength="15" id="pass1" placeholder="  Enter Password (8-15 characters)" />
+
+                                <input class="col-md-10" type="password" id="pass2" placeholder="  Re-enter Password" />
+
+                                <br /><br /><button class="btn btn-danger" onclick="signup();" type="submit" id="register">Create my account</button>
+
+                                <br /><br />Already have an account? <a data-toggle="modal" data-target="#exampleModalCenter" href="#" style="text-decoration:underline; color: dodgerblue;">Sign in</a>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!------footer-->
+                <div class="footer dulls w-100">
+                    &copy; 2019 musicWorld.com, All Rights <span style="font-weight:bold;">Reserved</span>.
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</body>
+</html>
+
+
+<script>
+
+    var users = [];
+
+    window.onload = function () {
+        if (window.localStorage.getItem('users') != null) {
+            users = JSON.parse(window.localStorage.getItem('users'));
+        }
+    };
+
+    function signup() {
+        var name = document.getElementById('name');
+        var mail = document.getElementById('mail');
+        var pass1 = document.getElementById('pass1');
+        var pass2 = document.getElementById('pass2');
+
+        //validation start
+
+        if (name.value == '' ||
+            mail.value == '' ||
+            pass1.value == ''
+        ) {
+            alert('Fields Empty...!!');
+            name.focus();
+            return false;
+        }
+
+        if (pass1.value != pass2.value) {
+            alert('Your Paswords don\'t match!');
+            pass2.value = '';
+            pass1.focus();
+            return false;
+        }
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].mail === mail.value) {
+                alert('This user already exists. Please Try again with a diferent E-mail.');
+                mail.focus();
+                mail.value = '';
+                return false;
+            }
+        }
+        //validation end
+
+        users.push({
+            name: name.value, mail: mail.value, password: pass1.value
+        });
+
+        window.localStorage.setItem('users', JSON.stringify(users));
+
+        alert('Thank You for signing up...! Your Account has been created successfully.');
+
+        name.value = '';
+        mail.value = '';
+        pass1.value = '';
+        pass2.value = '';
+        name.focus();
+
+        //window.localStorage.clear();
+    }
+
+</script>

@@ -1,0 +1,722 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>ARTICLES</title>
+    <link rel="icon" href="img/tab-icon.png" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="jquery.js"></script>
+    <script src="slide.js"></script>
+    <script src="data.js"></script>
+    <script src="login.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="main.css" />
+
+    <style>
+
+        .content {
+            background-image: url("img/bg-3.jpg");
+        }
+        .hh{
+            color: red;
+        }
+        .hh:hover{
+            color: red;
+            text-decoration: underline;
+        }
+        .bord {
+            background-color: rgba(0, 0, 0, 0.7);
+        
+        }
+        .bord-1 {
+            background-color: rgba(0, 0, 0, 0.7);
+s        }
+    </style>
+
+    <script type="text/html" id="template1">
+
+        <div class="col-md-3 slide06">
+            <div class="card">
+                <a href="{{link}}">
+                    <img class="card-img-top" src="{{thumbnail}}" />
+                    <div class="card-body">
+                        <pre><span style="font-weight: bold; font-size: 24px;">{{title}}</span>
+Artist: {{artist}}
+Album: {{album}}</pre>
+                    </div>
+                </a>
+            </div>
+        </div>
+        </script>
+
+</head>
+<body>
+
+    
+    <div class="container-fluid">
+        <!--logo + search bar-->
+        <div class="header row" id="head">
+            <div class="logo col-md-4" style="padding-left: 0px;">
+                <a href="index.html"><img style="padding-left: 0px" class="col-md-12" src="img/logo.png"/></a>
+            </div>
+            <div class="s-bar col-md-8">
+                <div class="s-bar-cont row">
+                    <div class="col-md-12">
+                        <input class="srch-bar col-md-5" id="keyword" type="text" placeholder="search for artists albums or songs"/>
+                        <button class="btn btn-danger bton" type="button" onclick="search()">SEARCH</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Navigation bar-->
+        <nav class="row navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navi-bar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navi-bar">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="target_name" href="#">
+                            CATEGORIES
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="ROCK.html">Rock</a>
+                            <a class="dropdown-item" href="POP.html">Pop</a>
+                            <a class="dropdown-item" href="JAZZ.html">Jazz</a>
+                            <a class="dropdown-item" href="RAP.html">Rap</a>
+                            <a class="dropdown-item" href="CLASSICAL.html">Classical</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                            ARTISTS
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="ATIF.html">Atif Aslam</a>
+                            <a class="dropdown-item" href="SAHIR.html">Sahir Ali Bagga</a>
+                            <a class="dropdown-item" href="ARIF.html">Arif Lohar</a>
+                            <a class="dropdown-item" href="SHEHZAD.html">Shehzad Roy</a>
+                            <a class="dropdown-item" href="RAHAT.html">Rahat Fateh Ali Khan</a>
+                            <a class="dropdown-item" href="ALI.html">Ali Zafar</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="ALBUMS.html">ALBUMS</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="ARTICLES.html">ARTICLES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="REVIEW.html">REVIEWS</a></li>
+                    <li class="nav-item" data-toggle="modal" data-target="#exampleModalCenter" id="sign1"><a class="nav-link" href="#">LOG IN</a></li>
+                    <li class="nav-item" id="sign2" style="border-right: 1px solid black;"><a class="nav-link" href="SIGN.html">SIGN UP</a></li>
+
+                </ul>
+            </div>
+            <!--logout button-->
+            <ul class="navbar-nav" id="log">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="target_name" href="#" style="padding: 10px; border-left: 2px solid black;">
+                        <span id="username"></span>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu" style="left: auto; right: 0;">
+                        <a class="dropdown-item" style="color: white;" href="#" onclick="abc234();">LOGOUT</a>
+                    </div>
+                </li>
+            </ul>
+
+        </nav>
+        <!--Wallpaper-->
+        
+        <!--Content-->
+        <div class="content">
+            <div class="dull w-100">
+
+                
+
+                <!---Search item-->
+                <div class="row">
+                    <div class="search-div col-md-12" id="search-div"></div>
+                </div>
+                <div class="row" id="back" style="text-align: center;">
+                    <div class="col-md-12">
+                        <button class="btn btn-danger" onclick="back()" type="button">BACK</button>
+                    </div>
+                </div>
+
+                <!--modal-->
+
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle" style="color: white">LOG IN</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" style="color: white">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <input class="col-md-12" type="email" placeholder="E-mail" id="logmail" value="" />
+                                <input class="col-md-12" type="password" placeholder="password" id="logpass" value="" />
+
+                            </div>
+                            <div class="modal-footer">
+                                <span style="color: white;">Need an account? <a href="SIGN.html"><span style="text-decoration:underline; color: dodgerblue;"> Sign up</span></a> now!</span>
+                                <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" onclick="login();" class="btn btn-danger">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--main div-->
+                <div class="main-div" id="main-div">
+
+                    <div class="row">
+                        <div class="col-md-12" style=" text-align:center; color:aliceblue; margin-top: 40px; margin-bottom: 40px;">
+                            <h1>ARTICLES</h1>
+                        </div>
+                    </div>
+                    <!----art1-->
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Abrar-ul-Haq</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/abrar-.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-1.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!----art2-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Arif Lohar</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/arif-.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-2.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!----art3-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Guitar</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/guitar.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-3.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!----art4-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Rahat Fateh Ali Khan</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/rahat-.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-4.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!----art5-->
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Jawad Ahmed</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/jawad.png" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-5.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!----art6-->
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Violin</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/violin.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-6.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!----art7-->
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Clarinet</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/clarinet.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-7.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!----art8-->
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Farhan Saeed</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/farhan-.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-8.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!----art9-->
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Drums</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/Drum.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-9.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <!----art10-->
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Young Desi</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/young-desi.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-10.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <!--art11-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Drum Machine</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/drum-machine.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-11.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <!--art12-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Hand Cymbals</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/finger.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-12.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <!--art13-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Flutes</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/flute.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-13.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <!--art14-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Piano</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/pino.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-14.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <!--art15-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Sampler</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/sampler.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-15.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <!--art16-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Tambourine</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/tamdourine.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-16.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <!--art17-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Trombone</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/trombone.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-17.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <!--art18-->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom:2%"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10 bord" style="font-size:xx-large; color:aliceblue;">Turntable</div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10 bord-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class=" img-responsive" src="img/truntable.jpg" width="300px" height="400px" />
+                                </div>
+                                <div class="col-md-8">
+                                    <pre style="color:aliceblue; white-space: pre-wrap; font-size:large;">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leoest, consequat semper ornare vel, feugiat vel sem. Curabitur quis nisised mauris dapibus dapibus. Nullam congue arcu in odio finibus accumsan.Etiam consectetur massa vel condimentum maximus. Fusce tempor velitmollis, pulvinar elit in, accumsan lectus. Donec fringilla arcu nulla,ac faucibus quam vehicula sed. Vestibulum pharetra cursus eros id.Etiam a mi elementum, rutrum mauris nec, pharetra lectus. Nulla sit amet lacinia magna, non lobortispurus. Quisque finibus venenatis nunceu blandit. Curabitur lorem lacus, auctor non quamnon, dignissim portarisus. Nam tortor massa, bibendum quis leo tincidunt, venenatis pulvintortor. Etiam lacus sapien, mattis id felis a, aliquet scelerisque elit.Praesent posuere bibendum ligula, elementum egestas orci consequat in...............
+<p style="text-align:end;"><a class="hh" href="art-18.html">Read More &rArr;</a></p>
+                                   </pre>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+
+
+
+
+                </div>
+
+                <!------footer-->
+                <div class="footer dulls w-100" style="margin-top: 40px;">
+                    &copy; 2019 musicWorld.com, All Rights <span style="font-weight:bold;">Reserved</span>.
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>                                                
